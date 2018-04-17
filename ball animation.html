@@ -1,0 +1,63 @@
+<html>
+<head>
+    <script>
+        var x = 30;
+        var y = 10;
+        var m = 0.9;
+          var flag = true;
+            var flag1 = true;
+            var flag2 = true;  
+            var flag3=true;
+
+        function ball() {
+          
+            var ba = document.getElementById("ball");
+            if(flag)
+                {
+                    x=x-1;
+                    if(flag2==true)
+                        {
+                            y+=Math.random();
+                            flag2=false;
+                        }
+                    ba.style.boxShadow="10px 10px 50px red";
+                }
+            else
+                {
+                    x=x+1;
+                    flag2=true;
+                    ba.style.boxShadow="-10px -10px 50px red";
+                }
+            
+            if(flag1)
+                {
+                    y=y-1;
+                    if(flag3==true)
+                        {
+                            x+=Math.random();
+                            flag3=false;
+                        }
+                }
+            else
+                {
+                    y=y+1;
+                    flag3=true;
+                }
+             if (x > 455 || x<31 )
+                flag=!flag;
+            if (y > 455 || y<11 )
+                flag1=!flag1;
+            ba.style.top = y;
+            ba.style.left = x;
+            setTimeout("ball()", 1);
+
+        }
+    </script>
+</head>
+
+<body onload="ball()">
+    <div id="div1" style="border: 1px solid black; width: 500px; height: 500px;">
+        <div id="ball" style="position: absolute;box-shadow:-10px -10px 50px red; width: 50px; height: 50px; border-radius: 50%; background-color: red"></div>
+    </div>
+</body>
+</html>

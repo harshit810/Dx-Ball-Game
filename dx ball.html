@@ -1,0 +1,154 @@
+<html>
+
+<head>
+    <style>
+        #bar{
+            width: 250px;
+            height: 20px;
+            background-color: orange;
+            position: absolute;
+            bottom: 0;
+        }
+    
+    </style>   
+    
+    <script>
+        var x = 26;
+        var y = 10;
+        var m = 0.9;
+        var go=true;
+        var flag = true;
+        var flag1 = true;
+        var flag2 = true;
+        var flag3 = true;
+        var score=0;
+
+
+        function ball() {
+
+            var ba = document.getElementById("ball");
+            var box = document.getElementById("div1");
+            var h = box.style.height;
+            var w = box.style.width;
+            //alert(w+h);
+            if (flag) 
+            {
+                x = x - 1;
+                if (flag2 == true) {
+                    y += Math.random();
+                    flag2 = false;
+                }
+            } 
+            else {
+                x = x + 1;
+                flag2 = true;
+            }
+
+            if (flag1) {
+                y = y - 1;
+                if (flag3 == true) {
+                    x += Math.random();
+                    flag3 = false;
+                }
+            } else {
+                y = y + 1;
+                flag3 = true;
+            }
+            if (x > parseInt(w) - 45 || x < 27)
+                flag = !flag;
+            if ( y < 11)
+                flag1 = !flag1;
+            if(y > parseInt(h) - 45 && x>left && x<left+250)
+                {
+                    flag1=!flag1;
+                    score++;
+                    var sc=document.getElementById("label")
+                    label.innerHTML=score;
+                    
+                }
+            if(y>520)
+                {
+                    go=false;
+                  alert("game over score is "+score);
+                }
+
+            ba.style.top = y;
+            ba.style.left = x;
+            
+            
+            
+            
+            if (x < 28) {
+                box.style.borderLeft = "5px solid yellow";
+            }
+            if (x > 749) {
+                box.style.borderRight = "5px solid yellow";
+            }
+            if (x > 28 && x < 749) {
+                box.style.border = "1px solid black";
+            }
+
+            if (y < 13) {
+
+                box.style.boxShadow = "0px -5px 0px yellow";
+            }
+            if (y > 449) {
+                box.style.boxShadow = "0px 5px 0px yellow";
+            }
+            if (y > 13 && y < 449) {
+                box.style.boxShadow = "none";
+            }
+            bar();
+            if(go)
+            setTimeout("ball()", 1);
+
+
+
+        }
+        
+        var left=0;
+        function bar(){
+            
+            var bar=document.getElementById("bar");
+            document.onkeydown=function(e){
+                switch(e.keyCode){
+                    case 37:
+                         if(left>10)
+                             {
+                                 left=left-25;
+                                 bar.style.left=left;
+                             }
+                        else
+                            left=0;
+                        
+                        break;
+                    case 39:
+                        
+                         if(left<545)
+                             {
+                                 left=left+25;
+                                 bar.style.left=left;
+                             }
+                        
+                        break;
+                                }
+            }
+        }
+
+    </script>
+</head>
+
+<body onload="ball()">
+    <div id="div1" style="overflow: hidden; padding-bottom: 23px;border: 1px solid black;  position:relative; width: 800px; height: 500px;">
+        <div id="ball" style="position: absolute; width: 50px; height: 50px; border-radius: 50%; background-color: red"></div>
+        <label id="label" style="margin-left: 350px;margin-top: 250px;font-size: 25px; z-index: 5;position: absolute;color:rgba(0,255,0,0.8)"></label>
+        <div id="bar"></div>
+    </div>
+    
+    
+    
+    <p></p>
+    
+</body>
+
+</html>
